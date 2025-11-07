@@ -10,8 +10,24 @@ from rl.llm_client import llm_client
 
 
 SEMANTIC_TAG_CACHE_KEY = "rl:semantic-tags:{movie_id}:v1"
-
-# 【全局标准化：中文关键词 → 细粒度英文标签】
+SEMANTIC_KEYWORD_MAP = {
+    "剧情": ["drama"],                # 1
+    "悬疑": ["suspense"],             # 2
+    "反转": ["plot_twist"],           # 3
+    "镜头画面": ["cinematic"],         # 4
+    "爱情": ["romance"],              # 5
+    "亲情": ["family_bond"],          # 6
+    "友情": ["friendship"],           # 7
+    "治愈温暖": ["heartwarming"],      # 8
+    "悲伤感动": ["emotional"],         # 9
+    "紧张刺激": ["thrilling"],         # 10
+    "慢热": ["slow_burn"],            # 11
+    "节奏激烈": ["fast_paced"],        # 12
+    "科幻": ["sci_fi"],               # 13
+    "世界观": ["world_building"],      # 14
+    "人性成长": ["human_nature"]       # 15
+}
+"""
 SEMANTIC_KEYWORD_MAP = {
     "叙事": ["linear_story", "story_driven"],
     "剧情": ["drama", "character_story"],
@@ -55,7 +71,7 @@ SEMANTIC_KEYWORD_MAP = {
     "救赎": ["redemption", "forgiveness"],
     "社会": ["social_commentary", "critical_realism"],
 }
-
+"""""
 
 def _local_semantic_tags(text: Optional[str]) -> List[str]:
     content = str(text or "")
@@ -75,16 +91,15 @@ def _remote_semantic_tags(text: Optional[str]) -> Optional[List[str]]:
 
     try:
         prompt = f"""
-任务：给电影简介生成英文语义标签。
+任务：根据电影简介，生成匹配的英文语义标签。你只能从固定15个标签中选择输出，禁止使用任何外部词汇。
+可选白名单标签：
+drama, suspense, plot_twist, cinematic, romance, family_bond, friendship, heartwarming, emotional, thrilling, slow_burn, fast_paced, sci_fi, world_building, human_nature
 规则：
-1. 只输出英文小写标签，多个单词用下划线 _ 连接
-2. 单个标签内最多2个下划线
-3. 绝对不要输出中文
-4. 不要输出任何说明文字
-5. 最多输出6个，逗号分隔
-6. 不要解释，不要多余内容，只输出标签
-
-示例：sci_fi, space_exploration, space, adventure
+1. 仅使用上方15个白名单标签，严禁自定义新词
+2. 只输出英文小写，多词下划线_连接，严格遵循标签原拼写
+3. 绝对不输出中文、解释、多余文字、标点
+4. 最多输出3个标签，使用英文逗号分隔
+5. 无匹配则输出空，不要占位符
 
 电影简介：{text}
 """

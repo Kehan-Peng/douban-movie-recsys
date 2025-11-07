@@ -19,10 +19,23 @@ GENRE_LIST = [
     "adventure", "crime", "animation", "documentary",
     "fantasy", "mystery", "thriller", "family", "history"
 ]
+
 SEMANTIC_TAGS_LIST = [
-    "action", "romantic", "comedy", "thriller", "suspense",
-    "heartwarming", "sad", "inspiring", "dark", "light",
-    "fast-paced", "slow-paced", "violent", "funny", "epic"
+    "drama",            # 剧情
+    "suspense",         # 悬疑
+    "plot_twist",       # 反转
+    "cinematic",        # 镜头/画面
+    "romance",          # 爱情
+    "family_bond",      # 亲情
+    "friendship",       # 友情
+    "heartwarming",     # 治愈/温暖
+    "emotional",        # 悲伤/感动
+    "thrilling",        # 紧张/刺激
+    "slow_burn",        # 慢热
+    "fast_paced",       # 节奏快/激烈
+    "sci_fi",           # 科幻
+    "world_building",   # 世界观
+    "human_nature"      # 人性/成长/救赎
 ]
 # 固定字典（全局只生成1次）
 GENRE_TO_IDX = {g: i for i, g in enumerate(GENRE_LIST)}
