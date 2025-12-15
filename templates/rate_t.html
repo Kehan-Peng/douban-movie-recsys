@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ratings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Ratings</h1>
+        <table id="ratingsTable">
+            <thead>
+                <tr>
+                    <th>Movie Title</th>
+                    <th>User Rating</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rating in ratings %}
+                <tr>
+                    <td>{{ rating.title }}</td>
+                    <td>{{ rating.user_rating }}</td>
+                    <td>{{ rating.comments }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}模型管理{% endblock %}
+{% block extra_head %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+{% endblock %}
+{% block content %}
+<div id="admin-app" data-page="models" class="admin-shell">
+    <div class="admin-hero">
+        <div>
+            <p class="eyebrow">Model Registry</p>
+            <h1>PPO 模型版本中心</h1>
+            <p>支持 bootstrap、批量训练、回滚和旧版本清理，方便在面试里讲模型治理和风险控制。</p>
+        </div>
+        <div class="action-row wrap">
+            <button class="btn" @click="bootstrapModel" :disabled="loading">Bootstrap</button>
+            <button class="btn btn-light" @click="trainModel(true)" :disabled="loading">强制训练</button>
+        </div>
+    </div>
+
+    <div class="flash flash-danger" v-if="error">[[ error ]]</div>
+    <div class="flash flash-success" v-if="message">[[ message ]]</div>
+
+    <section class="panel-card" v-if="models">
+        <div class="section-title">
+            <h2>当前策略</h2>
+            <button class="btn btn-light" @click="refresh" :disabled="loading">刷新</button>
+        </div>
+        <p>活跃模型：[[ models.active_model?.version_tag || '暂无' ]]</p>
+        <p>待训练经验：[[ models.pending_experiences ]]</p>
+        <p>多样性权重：[[ models.diversity_weight ]]，覆盖率权重：[[ models.coverage_weight ]]</p>
+    </section>
+
+    <section class="panel-card" v-if="models">
+        <div class="section-title">
+            <h2>版本列表</h2>
+            <span>自动保留最近版本，超出阈值会清理磁盘文件</span>
+        </div>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>版本</th>
+                        <th>状态</th>
+                        <th>样本数</th>
+                        <th>平均奖励</th>
+                        <th>辅助奖励</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="version in modelVersions" :key="version.version_tag">
+                        <td>[[ version.version_tag ]]</td>
+                        <td>[[ version.is_active ? 'active' : 'standby' ]]</td>
+                        <td>[[ version.metrics?.batch_size || 0 ]]</td>
+                        <td>[[ version.metrics?.avg_reward || 0 ]]</td>
+                        <td>[[ version.metrics?.avg_aux_reward || 0 ]]</td>
+                        <td>[[ version.created_at ]]</td>
+                        <td>
+                            <button class="btn btn-light" @click="rollbackModel(version.version_tag)" :disabled="version.is_active || loading">
+                                回滚
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin-dashboard.js') }}"></script>
+{% endblock %}

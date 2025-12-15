@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}注册 - 智能电影推荐系统{% endblock %}
+{% block content %}
+<div class="form-card">
+    <h2>用户注册</h2>
+    <form action="{{ url_for('register') }}" method="post" class="form-grid">
+        <label>
+            用户名
+            <input type="text" name="username" placeholder="请输入用户名" required>
+        </label>
+        <label>
+            邮箱
+            <input type="email" name="email" placeholder="请输入邮箱" required>
+        </label>
+        <label>
+            密码
+            <input type="password" name="password" placeholder="请输入密码" required>
+        </label>
+        <label>
+            确认密码
+            <input type="password" name="confirm_password" placeholder="请再次输入密码" required>
+        </label>
+        <button type="submit" class="btn">注册</button>
+    </form>
+</div>
+{% endblock %}

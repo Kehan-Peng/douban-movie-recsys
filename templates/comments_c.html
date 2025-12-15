@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Movie Comments</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Comments</h1>
+        <div id="comments-section">
+            {% if comments %}
+                <ul>
+                    {% for comment in comments %}
+                        <li>
+                            <strong>{{ comment.user }}</strong>: {{ comment.text }} <em>({{ comment.date }})</em>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No comments available for this movie.</p>
+            {% endif %}
+        </div>
+        <a href="{{ url_for('movie', movie_id=movie_id) }}">Back to Movie Details</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

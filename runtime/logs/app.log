@@ -1,0 +1,11 @@
+2026-03-28 18:59:22,453 | ERROR | app | admin job failed: comments
+Traceback (most recent call last):
+  File "/Users/pengkehan/projects/movie_recommendation/Python豆瓣电影数据分析可视化系统/myutils/admin_api.py", line 95, in runner
+    result = target(**kwargs)
+  File "/Users/pengkehan/projects/movie_recommendation/Python豆瓣电影数据分析可视化系统/myutils/crawler/jobs.py", line 143, in crawl_movie_comments
+    with output_csv.open("r", encoding="utf-8-sig", newline="") as csv_file:
+  File "/opt/miniconda3/envs/tf_env/lib/python3.9/pathlib.py", line 1180, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/opt/miniconda3/envs/tf_env/lib/python3.9/pathlib.py", line 1038, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/pengkehan/projects/movie_recommendation/Python豆瓣电影数据分析可视化系统/comments_dataset.csv'

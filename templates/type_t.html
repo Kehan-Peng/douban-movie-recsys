@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Movie Types</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Types</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Number of Movies</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for type, count in movie_types.items() %}
+                <tr>
+                    <td>{{ type }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

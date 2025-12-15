@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}实验对比{% endblock %}
+{% block extra_head %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+{% block content %}
+<div id="admin-app" data-page="experiments" class="admin-shell">
+    <div class="admin-hero">
+        <div>
+            <p class="eyebrow">Experiment Lab</p>
+            <h1>离线实验对比中心</h1>
+            <p>把 baseline、Word2Vec-style、GloVe-style、semantic hybrid 和 PPO 重排的离线指标快照沉淀下来，形成可追溯的算法迭代记录。</p>
+        </div>
+        <div class="action-row wrap">
+            <button class="btn" @click="runExperiment" :disabled="loading">生成快照</button>
+            <a class="btn btn-light" href="{{ url_for('admin_bp.admin_dashboard') }}">返回总览</a>
+        </div>
+    </div>
+
+    <div class="flash flash-danger" v-if="error">[[ error ]]</div>
+    <div class="flash flash-success" v-if="message">[[ message ]]</div>
+
+    <section class="dual-grid">
+        <article class="panel-card">
+            <h2>快照参数</h2>
+            <div class="form-grid">
+                <label>Top-K<input type="number" v-model="experimentForm.top_k"></label>
+                <label>备注<input type="text" v-model="experimentForm.note" placeholder="例如：引入 GloVe 后的对比"></label>
+            </div>
+        </article>
+        <article class="panel-card">
+            <div class="section-title">
+                <h2>历史快照</h2>
+                <button class="btn btn-light" @click="refresh" :disabled="loading">刷新</button>
+            </div>
+            <div class="status-list">
+                <div class="status-row" v-for="run in experimentRuns" :key="run.id">
+                    <strong>[[ run.run_name ]]</strong>
+                    <span>[[ run.created_at ]]</span>
+                    <span>[[ run.note || '无备注' ]]</span>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="panel-card" v-if="experimentTrends.length">
+        <div class="section-title">
+            <h2>趋势折线图</h2>
+            <span>按快照时间顺序展示各算法的离线指标轨迹</span>
+        </div>
+        <div class="chart-toolbar">
+            <label>折线指标
+                <select v-model="experimentChartMetric" @change="renderExperimentCharts">
+                    <option value="ndcg">NDCG@K</option>
+                    <option value="recall">Recall@K</option>
+                    <option value="precision">Precision@K</option>
+                    <option value="coverage">Coverage</option>
+                    <option value="diversity">Diversity</option>
+                </select>
+            </label>
+        </div>
+        <div class="chart-panel">
+            <canvas id="experiment-line-chart" height="120"></canvas>
+        </div>
+    </section>
+
+    <section class="panel-card" v-if="experimentLatestMetrics.length">
+        <div class="section-title">
+            <h2>最新快照柱状图</h2>
+            <span>直接对比最近一次离线实验里各算法的指标表现</span>
+        </div>
+        <div class="chart-toolbar">
+            <label>柱状指标
+                <select v-model="experimentBarMetric" @change="renderExperimentCharts">
+                    <option value="ndcg_at_k">NDCG@K</option>
+                    <option value="recall_at_k">Recall@K</option>
+                    <option value="precision_at_k">Precision@K</option>
+                    <option value="coverage">Coverage</option>
+                    <option value="diversity">Diversity</option>
+                </select>
+            </label>
+        </div>
+        <div class="chart-panel">
+            <canvas id="experiment-bar-chart" height="120"></canvas>
+        </div>
+    </section>
+
+    <section class="panel-card" v-if="experimentTrends.length">
+        <div class="section-title">
+            <h2>原始趋势数据</h2>
+            <span>保留表格，方便面试时展开说明每次实验的变化原因</span>
+        </div>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>算法</th>
+                        <th>NDCG 趋势</th>
+                        <th>Recall 趋势</th>
+                        <th>Coverage 趋势</th>
+                        <th>Diversity 趋势</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="trend in experimentTrends" :key="trend.algorithm">
+                        <td>[[ trend.algorithm ]]</td>
+                        <td>[[ trend.ndcg.join(' → ') ]]</td>
+                        <td>[[ trend.recall.join(' → ') ]]</td>
+                        <td>[[ trend.coverage.join(' → ') ]]</td>
+                        <td>[[ trend.diversity.join(' → ') ]]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin-dashboard.js') }}"></script>
+{% endblock %}

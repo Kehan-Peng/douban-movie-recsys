@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Casts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Casts</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Actor Name</th>
+                    <th>Character Name</th>
+                    <th>Movie Title</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cast in casts %}
+                <tr>
+                    <td>{{ cast.actor_name }}</td>
+                    <td>{{ cast.character_name }}</td>
+                    <td>{{ cast.movie_title }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

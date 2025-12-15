@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}电影搜索 - 智能电影推荐系统{% endblock %}
+{% block content %}
+<section class="search-panel">
+    <h2>搜索电影</h2>
+    <form action="{{ url_for('search') }}" method="get" class="search-form">
+        <input type="text" name="query" value="{{ query }}" placeholder="输入片名、类型、导演或地区">
+        <button type="submit" class="btn">搜索</button>
+    </form>
+</section>
+
+{% if query %}
+<section>
+    <div class="section-title">
+        <h2>搜索结果</h2>
+        <span>关键词：{{ query }}</span>
+    </div>
+    {% if movies %}
+    <div class="movie-grid">
+        {% for movie in movies %}
+        <article class="movie-card">
+            <a href="{{ url_for('movie', movie_id=movie.id) }}">
+                <img class="movie-cover" src="{{ movie.cover_url or url_for('static', filename='cover/default.svg') }}" alt="{{ movie.title }}">
+                <h3>{{ movie.title }}</h3>
+            </a>
+            <p>评分：{{ '%.1f'|format(movie.rate) }}</p>
+            <p>{{ movie.types }}</p>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-card">没有找到与 “{{ query }}” 相关的电影。</div>
+    {% endif %}
+</section>
+{% endif %}
+{% endblock %}

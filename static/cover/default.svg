@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="480" viewBox="0 0 320 480">
+  <rect width="320" height="480" fill="#dbeafe"/>
+  <rect x="24" y="24" width="272" height="432" rx="24" fill="#bfdbfe" stroke="#4e73df" stroke-dasharray="8 8"/>
+  <text x="160" y="220" text-anchor="middle" font-size="72">🎬</text>
+  <text x="160" y="280" text-anchor="middle" font-size="24" fill="#1d4ed8">Movie Cover</text>
+</svg>

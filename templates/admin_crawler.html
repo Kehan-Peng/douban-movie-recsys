@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}爬虫中心{% endblock %}
+{% block extra_head %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+{% endblock %}
+{% block content %}
+<div id="admin-app" data-page="crawler" class="admin-shell">
+    <div class="admin-hero">
+        <div>
+            <p class="eyebrow">Crawler Studio</p>
+            <h1>本地数据采集与样本扩容</h1>
+            <p>支持多页爬取、评论采集和模拟行为生成，目标是把演示项目扩成可训练、可评估的本地数据集。</p>
+        </div>
+        <div class="action-row wrap">
+            <button class="btn" @click="runCrawler('movies')" :disabled="loading">抓电影</button>
+            <button class="btn btn-light" @click="runCrawler('comments')" :disabled="loading">抓评论</button>
+            <button class="btn btn-light" @click="runCrawler('behaviors')" :disabled="loading">生成行为</button>
+        </div>
+    </div>
+
+    <div class="flash flash-danger" v-if="error">[[ error ]]</div>
+    <div class="flash flash-success" v-if="message">[[ message ]]</div>
+
+    <section class="dual-grid">
+        <article class="panel-card">
+            <h2>任务参数</h2>
+            <div class="form-grid">
+                <label>电影页数<input type="number" v-model="jobForm.pages"></label>
+                <label>每部电影评论页数<input type="number" v-model="jobForm.pages_per_movie"></label>
+                <label>评论采样电影数<input type="number" v-model="jobForm.limit_movies"></label>
+                <label>模拟用户数<input type="number" v-model="jobForm.user_count"></label>
+                <label>每用户最少行为<input type="number" v-model="jobForm.min_behaviors"></label>
+                <label>每用户最多行为<input type="number" v-model="jobForm.max_behaviors"></label>
+            </div>
+        </article>
+        <article class="panel-card">
+            <div class="section-title">
+                <h2>任务状态</h2>
+                <button class="btn btn-light" @click="refresh" :disabled="loading">刷新</button>
+            </div>
+            <div class="status-list">
+                <div class="status-row" v-for="[name, row] in crawlerRows" :key="name">
+                    <strong>[[ name ]]</strong>
+                    <span>[[ row.status || 'unknown' ]]</span>
+                    <span>[[ row.updated_at || '-' ]]</span>
+                </div>
+            </div>
+        </article>
+    </section>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin-dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}{{ movie.title }} - 电影详情{% endblock %}
+{% block content %}
+<section class="detail-layout">
+    <article class="detail-card">
+        <div class="detail-header">
+            <img class="movie-cover large" src="{{ movie.cover_url or url_for('static', filename='cover/default.svg') }}" alt="{{ movie.title }}">
+            <div>
+                <h1>{{ movie.title }}</h1>
+                <p><strong>评分：</strong>{{ '%.1f'|format(movie.rate) }}</p>
+                <p><strong>类型：</strong>{{ movie.types }}</p>
+                <p><strong>导演：</strong>{{ movie.directors }}</p>
+                <p><strong>主演：</strong>{{ movie.casts }}</p>
+                <p><strong>地区：</strong>{{ movie.country }}</p>
+                <p><strong>上映年份：</strong>{{ movie.release_year }}</p>
+                <p><strong>片长：</strong>{{ movie.duration }} 分钟</p>
+            </div>
+        </div>
+        <div class="detail-section">
+            <h3>剧情简介</h3>
+            <p>{{ movie.summary }}</p>
+        </div>
+    </article>
+
+    <aside class="side-card">
+        <h3>我的行为</h3>
+        {% if current_user_email %}
+        <div class="movie-behavior" data-movie-id="{{ movie.id }}">
+            <p class="helper-text">点击按钮可记录评分 / 收藏 / 观看行为</p>
+            <div class="score-star">
+                {% for score in [10, 9, 8, 7, 6, 5] %}
+                <button type="button" class="star-btn {% if user_behaviors.score == score %}active{% endif %}" data-score="{{ score }}">{{ score }}分</button>
+                {% endfor %}
+            </div>
+            <div class="action-row wrap">
+                <button type="button" class="btn btn-secondary behavior-btn {% if user_behaviors.collected %}is-done{% endif %}" data-behavior-type="2">
+                    {% if user_behaviors.collected %}已收藏{% else %}收藏{% endif %}
+                </button>
+                <button type="button" class="btn btn-secondary behavior-btn {% if user_behaviors.watched %}is-done{% endif %}" data-behavior-type="3">
+                    {% if user_behaviors.watched %}已观看{% else %}标记已观看{% endif %}
+                </button>
+            </div>
+            <div id="behavior-message" class="helper-text"></div>
+        </div>
+        {% else %}
+        <p>登录后可评分、收藏并生成个性化推荐。</p>
+        <a class="btn" href="{{ url_for('login', next=request.url) }}">立即登录</a>
+        {% endif %}
+    </aside>
+</section>
+
+<section>
+    <div class="section-title">
+        <h2>相似电影推荐</h2>
+        <span>基于内容相似度</span>
+    </div>
+    <div class="movie-grid">
+        {% for recommended_movie in recommendations %}
+        <article class="movie-card">
+            <a href="{{ url_for('movie', movie_id=recommended_movie.id) }}">
+                <img class="movie-cover" src="{{ recommended_movie.cover_url or url_for('static', filename='cover/default.svg') }}" alt="{{ recommended_movie.title }}">
+                <h3>{{ recommended_movie.title }}</h3>
+            </a>
+            <p>评分：{{ '%.1f'|format(recommended_movie.rate) }}</p>
+            <p class="movie-reason">{{ recommended_movie.reason }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section>
+    <div class="section-title">
+        <h2>用户评论</h2>
+        <span>共 {{ comments|length }} 条</span>
+    </div>
+    {% if comments %}
+    <div class="comment-list">
+        {% for comment in comments %}
+        <article class="comment-card">
+            <strong>{{ comment.username }}</strong>
+            <p>{{ comment.content }}</p>
+            <span>{{ comment.created_at }}</span>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-card">暂无评论。</div>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% if current_user_email %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const behaviorBox = document.querySelector('.movie-behavior');
+    if (!behaviorBox) return;
+    const movieId = behaviorBox.dataset.movieId;
+    const messageNode = document.getElementById('behavior-message');
+
+    async function submitBehavior(payload) {
+        try {
+            const result = await window.MovieApp.postForm('/behavior/add', payload);
+            messageNode.textContent = result.msg;
+            if (result.code === 200) {
+                window.setTimeout(() => window.location.reload(), 500);
+            }
+        } catch (error) {
+            messageNode.textContent = error.message || '提交失败';
+        }
+    }
+
+    behaviorBox.querySelectorAll('.star-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+            submitBehavior({
+                movie_id: movieId,
+                behavior_type: 1,
+                score: button.dataset.score,
+            });
+        });
+    });
+
+    behaviorBox.querySelectorAll('.behavior-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+            submitBehavior({
+                movie_id: movieId,
+                behavior_type: button.dataset.behaviorType,
+            });
+        });
+    });
+});
+</script>
+{% endif %}
+{% endblock %}

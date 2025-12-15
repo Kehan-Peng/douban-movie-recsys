@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Address Information</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Address Information</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Street</td>
+                    <td>{{ address.street }}</td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>{{ address.city }}</td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>{{ address.state }}</td>
+                </tr>
+                <tr>
+                    <td>Zip Code</td>
+                    <td>{{ address.zip_code }}</td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>{{ address.country }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>

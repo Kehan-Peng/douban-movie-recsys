@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}首页 - 智能电影推荐系统{% endblock %}
+{% block content %}
+<section class="hero-card">
+    <div>
+        <h1>基于内容 + 协同过滤的智能电影推荐系统</h1>
+        <p>保留原有电影展示能力，新增用户评分、收藏、观看行为采集与个性化推荐能力。</p>
+        <div class="action-row">
+            <a class="btn" href="{{ url_for('search') }}">开始找电影</a>
+            {% if current_user_email %}
+            <a class="btn btn-secondary" href="{{ url_for('get_recommend') }}">查看我的推荐</a>
+            {% else %}
+            <a class="btn btn-secondary" href="{{ url_for('login') }}">登录后体验推荐</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% if current_user_email and recommend_list %}
+<section>
+    <div class="section-title">
+        <h2>为你推荐</h2>
+        <a href="{{ url_for('get_recommend') }}">查看更多</a>
+    </div>
+    <div class="movie-grid">
+        {% for movie in recommend_list %}
+        <article class="movie-card">
+            <a href="{{ url_for('movie', movie_id=movie.id) }}">
+                <img class="movie-cover" src="{{ movie.cover_url or url_for('static', filename='cover/default.svg') }}" alt="{{ movie.title }}">
+                <h3>{{ movie.title }}</h3>
+            </a>
+            <p>评分：{{ '%.1f'|format(movie.rate) }}</p>
+            <p class="movie-reason">{{ movie.reason }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<section>
+    <div class="section-title">
+        <h2>高分电影榜单</h2>
+        <span>按评分与评论热度排序</span>
+    </div>
+    <div class="movie-grid">
+        {% for movie in top_movies %}
+        <article class="movie-card">
+            <a href="{{ url_for('movie', movie_id=movie.id) }}">
+                <img class="movie-cover" src="{{ movie.cover_url or url_for('static', filename='cover/default.svg') }}" alt="{{ movie.title }}">
+                <h3>{{ movie.title }}</h3>
+            </a>
+            <p>评分：{{ '%.1f'|format(movie.rate) }}</p>
+            <p>{{ movie.types }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,154 @@
+﻿user_email,movie_title,movie_subject_id,behavior_type,score,create_time
+user_001@example.com,Pulp Fiction,,3,,2026-01-27 12:56:00
+user_001@example.com,Fight Club,,1,7.1,2026-01-05 12:50:00
+user_001@example.com,The Lord of the Rings: The Return of the King,,2,,2026-01-06 12:27:00
+user_002@example.com,Pulp Fiction,,1,7.6,2026-01-18 12:27:00
+user_002@example.com,The Matrix,,3,,2026-01-28 12:26:00
+user_003@example.com,The Dark Knight,,1,6.5,2026-01-08 12:02:00
+user_003@example.com,The Lord of the Rings: The Return of the King,,2,,2026-01-23 12:16:00
+user_003@example.com,Forrest Gump,,3,,2026-01-13 12:18:00
+user_004@example.com,The Lord of the Rings: The Return of the King,,1,6.2,2026-01-16 12:11:00
+user_004@example.com,Pulp Fiction,,3,,2026-01-11 12:02:00
+user_004@example.com,Fight Club,,2,,2026-01-28 12:07:00
+user_005@example.com,The Dark Knight,,1,8.5,2026-01-04 12:24:00
+user_005@example.com,The Godfather,,2,,2026-01-01 12:26:00
+user_006@example.com,The Godfather,,1,6.5,2026-01-19 12:40:00
+user_006@example.com,Fight Club,,3,,2026-01-15 12:20:00
+user_007@example.com,Forrest Gump,,1,6.3,2026-01-09 12:27:00
+user_007@example.com,The Matrix,,3,,2026-01-14 12:47:00
+user_007@example.com,Goodfellas,,2,,2026-01-19 12:49:00
+user_008@example.com,Forrest Gump,,1,8.3,2026-01-01 12:32:00
+user_008@example.com,The Godfather,,3,,2026-01-07 12:44:00
+user_008@example.com,The Shawshank Redemption,,2,,2026-01-22 12:32:00
+user_009@example.com,Forrest Gump,,2,,2026-01-04 12:50:00
+user_009@example.com,The Shawshank Redemption,,1,7.4,2026-01-04 12:41:00
+user_009@example.com,The Lord of the Rings: The Return of the King,,3,,2026-01-24 12:35:00
+user_010@example.com,The Lord of the Rings: The Return of the King,,1,7.0,2026-01-06 12:28:00
+user_010@example.com,The Godfather,,2,,2026-01-28 12:53:00
+user_010@example.com,The Dark Knight,,3,,2026-01-12 12:20:00
+user_011@example.com,Goodfellas,,1,7.0,2026-01-10 12:57:00
+user_011@example.com,The Shawshank Redemption,,3,,2026-01-11 12:40:00
+user_012@example.com,Pulp Fiction,,2,,2026-01-15 12:32:00
+user_012@example.com,Forrest Gump,,1,7.4,2026-01-14 12:47:00
+user_012@example.com,Inception,,3,,2026-01-13 12:15:00
+user_013@example.com,The Shawshank Redemption,,1,7.0,2026-01-05 12:42:00
+user_013@example.com,The Dark Knight,,2,,2026-01-06 12:38:00
+user_014@example.com,Forrest Gump,,1,5.5,2026-01-01 12:18:00
+user_014@example.com,The Lord of the Rings: The Return of the King,,2,,2026-01-28 12:30:00
+user_014@example.com,Fight Club,,3,,2026-01-27 12:42:00
+user_015@example.com,The Godfather,,1,8.4,2026-01-26 12:30:00
+user_015@example.com,Fight Club,,2,,2026-01-13 12:20:00
+user_016@example.com,The Lord of the Rings: The Return of the King,,1,8.3,2026-01-07 12:57:00
+user_017@example.com,Fight Club,,1,6.0,2026-01-09 12:16:00
+user_017@example.com,The Shawshank Redemption,,2,,2026-01-01 12:57:00
+user_018@example.com,Fight Club,,1,6.1,2026-01-23 12:14:00
+user_018@example.com,The Godfather,,2,,2026-01-24 12:04:00
+user_019@example.com,Pulp Fiction,,1,7.0,2026-01-05 12:58:00
+user_019@example.com,Forrest Gump,,2,,2026-01-24 12:16:00
+user_019@example.com,The Godfather,,3,,2026-01-28 12:11:00
+user_020@example.com,The Dark Knight,,1,7.6,2026-01-07 12:48:00
+user_020@example.com,The Lord of the Rings: The Return of the King,,3,,2026-01-02 12:28:00
+user_020@example.com,Inception,,2,,2026-01-05 12:07:00
+user_021@example.com,Inception,,1,6.7,2026-01-05 12:29:00
+user_021@example.com,The Lord of the Rings: The Return of the King,,3,,2026-01-22 12:04:00
+user_022@example.com,The Lord of the Rings: The Return of the King,,1,6.8,2026-01-19 12:52:00
+user_022@example.com,The Matrix,,2,,2026-01-27 12:29:00
+user_023@example.com,Goodfellas,,1,6.6,2026-01-03 12:55:00
+user_023@example.com,Pulp Fiction,,2,,2026-01-09 12:31:00
+user_024@example.com,The Godfather,,1,8.8,2026-01-25 12:33:00
+user_024@example.com,Forrest Gump,,2,,2026-01-10 12:10:00
+user_025@example.com,The Matrix,,1,7.0,2026-01-12 12:44:00
+user_025@example.com,Goodfellas,,3,,2026-01-04 12:00:00
+user_026@example.com,Inception,,1,7.1,2026-01-25 12:52:00
+user_026@example.com,Pulp Fiction,,2,,2026-01-07 12:26:00
+user_026@example.com,The Dark Knight,,3,,2026-01-14 12:31:00
+user_027@example.com,Forrest Gump,,3,,2026-01-01 12:32:00
+user_027@example.com,The Lord of the Rings: The Return of the King,,1,6.8,2026-01-16 12:29:00
+user_028@example.com,The Shawshank Redemption,,3,,2026-01-13 12:37:00
+user_028@example.com,The Godfather,,1,6.9,2026-01-21 12:10:00
+user_029@example.com,Pulp Fiction,,1,6.1,2026-01-05 12:29:00
+user_029@example.com,The Dark Knight,,2,,2026-01-08 12:50:00
+user_030@example.com,Pulp Fiction,,3,,2026-01-22 12:00:00
+user_030@example.com,The Godfather,,2,,2026-01-28 12:10:00
+user_030@example.com,Inception,,1,8.6,2026-01-08 12:50:00
+user_031@example.com,The Matrix,,1,6.8,2026-01-27 12:42:00
+user_031@example.com,Goodfellas,,3,,2026-01-10 12:13:00
+user_031@example.com,The Dark Knight,,2,,2026-01-11 12:58:00
+user_032@example.com,Goodfellas,,1,8.5,2026-01-23 12:09:00
+user_032@example.com,Forrest Gump,,2,,2026-01-10 12:39:00
+user_032@example.com,The Matrix,,3,,2026-01-10 12:40:00
+user_033@example.com,The Godfather,,1,6.3,2026-01-13 12:13:00
+user_033@example.com,Inception,,2,,2026-01-15 12:57:00
+user_033@example.com,Goodfellas,,3,,2026-01-12 12:00:00
+user_034@example.com,The Dark Knight,,1,6.4,2026-01-01 12:56:00
+user_034@example.com,Goodfellas,,3,,2026-01-09 12:47:00
+user_034@example.com,The Matrix,,2,,2026-01-17 12:16:00
+user_035@example.com,Fight Club,,1,7.9,2026-01-28 12:08:00
+user_035@example.com,Goodfellas,,3,,2026-01-12 12:07:00
+user_035@example.com,Inception,,2,,2026-01-08 12:41:00
+user_036@example.com,Pulp Fiction,,1,5.7,2026-01-09 12:14:00
+user_036@example.com,The Lord of the Rings: The Return of the King,,3,,2026-01-20 12:44:00
+user_037@example.com,Forrest Gump,,1,8.1,2026-01-14 12:07:00
+user_037@example.com,Fight Club,,2,,2026-01-20 12:26:00
+user_037@example.com,The Dark Knight,,3,,2026-01-11 12:38:00
+user_038@example.com,Forrest Gump,,2,,2026-01-09 12:09:00
+user_038@example.com,Inception,,1,7.1,2026-01-15 12:22:00
+user_038@example.com,The Dark Knight,,3,,2026-01-17 12:07:00
+user_039@example.com,The Shawshank Redemption,,1,7.4,2026-01-19 12:45:00
+user_039@example.com,Forrest Gump,,3,,2026-01-24 12:52:00
+user_039@example.com,Pulp Fiction,,2,,2026-01-14 12:50:00
+user_040@example.com,The Dark Knight,,1,6.8,2026-01-16 12:12:00
+user_040@example.com,Pulp Fiction,,3,,2026-01-02 12:03:00
+user_040@example.com,The Shawshank Redemption,,2,,2026-01-22 12:19:00
+user_041@example.com,The Shawshank Redemption,,3,,2026-01-28 12:28:00
+user_041@example.com,The Godfather,,1,7.1,2026-01-21 12:56:00
+user_041@example.com,Forrest Gump,,2,,2026-01-18 12:40:00
+user_042@example.com,Fight Club,,1,7.4,2026-01-21 12:56:00
+user_042@example.com,The Matrix,,2,,2026-01-09 12:25:00
+user_042@example.com,The Dark Knight,,3,,2026-01-19 12:22:00
+user_043@example.com,Inception,,1,7.6,2026-01-27 12:31:00
+user_043@example.com,The Lord of the Rings: The Return of the King,,3,,2026-01-06 12:00:00
+user_043@example.com,The Shawshank Redemption,,2,,2026-01-08 12:37:00
+user_044@example.com,The Lord of the Rings: The Return of the King,,3,,2026-01-24 12:45:00
+user_044@example.com,The Dark Knight,,1,6.3,2026-01-11 12:03:00
+user_044@example.com,Goodfellas,,2,,2026-01-20 12:37:00
+user_045@example.com,Goodfellas,,3,,2026-01-22 12:31:00
+user_045@example.com,Fight Club,,1,8.5,2026-01-10 12:04:00
+user_045@example.com,The Shawshank Redemption,,2,,2026-01-14 12:15:00
+user_046@example.com,Pulp Fiction,,1,8.3,2026-01-01 12:25:00
+user_046@example.com,Inception,,2,,2026-01-08 12:07:00
+user_047@example.com,Fight Club,,1,6.7,2026-01-14 12:58:00
+user_047@example.com,The Dark Knight,,3,,2026-01-10 12:15:00
+user_048@example.com,Goodfellas,,1,7.3,2026-01-21 12:25:00
+user_048@example.com,The Shawshank Redemption,,3,,2026-01-20 12:56:00
+user_048@example.com,The Dark Knight,,2,,2026-01-08 12:23:00
+user_049@example.com,The Dark Knight,,1,7.7,2026-01-23 12:12:00
+user_049@example.com,The Lord of the Rings: The Return of the King,,3,,2026-01-25 12:56:00
+user_050@example.com,Fight Club,,2,,2026-01-19 12:39:00
+user_050@example.com,The Lord of the Rings: The Return of the King,,1,7.0,2026-01-05 12:10:00
+user_050@example.com,Forrest Gump,,3,,2026-01-23 12:46:00
+user_051@example.com,The Godfather,,1,7.2,2026-01-26 12:56:00
+user_051@example.com,The Shawshank Redemption,,3,,2026-01-17 12:01:00
+user_051@example.com,Forrest Gump,,2,,2026-01-18 12:48:00
+user_052@example.com,The Lord of the Rings: The Return of the King,,1,5.7,2026-01-20 12:21:00
+user_052@example.com,The Matrix,,3,,2026-01-20 12:48:00
+user_053@example.com,Goodfellas,,2,,2026-01-09 12:13:00
+user_053@example.com,The Shawshank Redemption,,1,7.5,2026-01-19 12:47:00
+user_053@example.com,Forrest Gump,,3,,2026-01-04 12:18:00
+user_054@example.com,The Lord of the Rings: The Return of the King,,3,,2026-01-01 12:20:00
+user_054@example.com,Goodfellas,,1,7.1,2026-01-12 12:52:00
+user_054@example.com,Inception,,2,,2026-01-21 12:07:00
+user_055@example.com,The Dark Knight,,1,5.7,2026-01-13 12:45:00
+user_055@example.com,Pulp Fiction,,2,,2026-01-25 12:57:00
+user_055@example.com,The Shawshank Redemption,,3,,2026-01-12 12:51:00
+user_056@example.com,The Shawshank Redemption,,1,7.7,2026-01-18 12:30:00
+user_056@example.com,Pulp Fiction,,3,,2026-01-15 12:15:00
+user_056@example.com,Goodfellas,,2,,2026-01-23 12:29:00
+user_057@example.com,The Godfather,,1,6.5,2026-01-25 12:46:00
+user_057@example.com,The Lord of the Rings: The Return of the King,,2,,2026-01-16 12:42:00
+user_058@example.com,The Godfather,,1,7.3,2026-01-06 12:55:00
+user_058@example.com,Fight Club,,3,,2026-01-14 12:38:00
+user_059@example.com,Pulp Fiction,,1,8.8,2026-01-02 12:14:00
+user_060@example.com,The Matrix,,1,6.1,2026-01-02 12:36:00
+user_060@example.com,Forrest Gump,,3,,2026-01-16 12:44:00
+user_060@example.com,Pulp Fiction,,2,,2026-01-04 12:59:00

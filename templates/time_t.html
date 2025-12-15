@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Time Data</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Time Data Analysis</h1>
+        <table id="timeDataTable" class="table">
+            <thead>
+                <tr>
+                    <th>Time Period</th>
+                    <th>Movie Count</th>
+                    <th>Average Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in time_data %}
+                <tr>
+                    <td>{{ entry.time_period }}</td>
+                    <td>{{ entry.movie_count }}</td>
+                    <td>{{ entry.average_rating }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

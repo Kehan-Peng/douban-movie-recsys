@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}个性化推荐 - 智能电影推荐系统{% endblock %}
+{% block content %}
+<section>
+    <div class="section-title">
+        <div>
+            <h2>为 {{ email }} 推荐的电影</h2>
+            <p class="helper-text">优先协同过滤，结果不足时使用内容推荐与热门电影补足。</p>
+        </div>
+        <form action="{{ url_for('get_recommend') }}" method="get" class="inline-form">
+            <label>
+                数量
+                <input type="number" name="top_n" min="1" max="20" value="{{ top_n }}">
+            </label>
+            <button class="btn" type="submit">刷新推荐</button>
+        </form>
+    </div>
+
+    {% if recommend_list %}
+    <div class="movie-grid">
+        {% for movie in recommend_list %}
+        <article class="movie-card">
+            <a href="{{ url_for('movie', movie_id=movie.id) }}">
+                <img class="movie-cover" src="{{ movie.cover_url or url_for('static', filename='cover/default.svg') }}" alt="{{ movie.title }}">
+                <h3>{{ movie.title }}</h3>
+            </a>
+            <p>评分：{{ '%.1f'|format(movie.rate) }}</p>
+            <p class="movie-reason">{{ movie.reason }}</p>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-card">当前暂无可展示的推荐结果。</div>
+    {% endif %}
+</section>
+{% endblock %}

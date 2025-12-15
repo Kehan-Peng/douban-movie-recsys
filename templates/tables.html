@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Movie Data Table</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Movie Data Table</h1>
+        <table id="movieTable" class="table">
+            <thead>
+                <tr>
+                    <th>Movie Title</th>
+                    <th>Rating</th>
+                    <th>Year</th>
+                    <th>Genre</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movie in movies %}
+                <tr>
+                    <td>{{ movie.title }}</td>
+                    <td>{{ movie.rating }}</td>
+                    <td>{{ movie.release_date }}</td>
+                    <td>{{ movie.genres|join('/') }}</td>
+                    <td>
+                        <a href="{{ url_for('movie', movie_id=movie.id) }}">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="{{ url_for('static', filename='js/datatables-simple-demo.js') }}"></script>
+</body>
+</html>

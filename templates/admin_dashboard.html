@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}后台总览{% endblock %}
+{% block extra_head %}
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+{% endblock %}
+{% block content %}
+<div id="admin-app" data-page="dashboard" class="admin-shell">
+    <div class="admin-hero">
+        <div>
+            <p class="eyebrow">Admin Console</p>
+            <h1>推荐系统总览</h1>
+            <p>把数据规模、离线指标、RL 训练状态和采集链路放到一个面板里，方便演示“数据驱动优化”的闭环。</p>
+        </div>
+        <div class="action-row wrap">
+            <a class="btn btn-light" href="{{ url_for('admin_bp.admin_models') }}">模型管理</a>
+            <a class="btn btn-light" href="{{ url_for('admin_bp.admin_crawler') }}">爬虫中心</a>
+            <a class="btn btn-light" href="{{ url_for('admin_bp.admin_experiments') }}">实验对比</a>
+        </div>
+    </div>
+
+    <div class="flash flash-danger" v-if="error">[[ error ]]</div>
+    <div class="flash flash-success" v-if="message">[[ message ]]</div>
+
+    <section class="admin-grid" v-if="overview">
+        <article class="metric-card" v-for="(value, key) in overview.system" :key="key">
+            <span>[[ key ]]</span>
+            <strong>[[ value ]]</strong>
+        </article>
+    </section>
+
+    <section class="panel-card" v-if="overview">
+        <div class="section-title">
+            <h2>离线评估</h2>
+            <span>样本用户 [[ overview.evaluation.sample_users ]]，Top-K [[ overview.evaluation.top_k ]]</span>
+        </div>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>算法</th>
+                        <th>Precision@K</th>
+                        <th>Recall@K</th>
+                        <th>NDCG@K</th>
+                        <th>Coverage</th>
+                        <th>Diversity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="row in metricRows" :key="row.algorithm">
+                        <td>[[ row.algorithm ]]</td>
+                        <td>[[ row.precision_at_k ]]</td>
+                        <td>[[ row.recall_at_k ]]</td>
+                        <td>[[ row.ndcg_at_k ]]</td>
+                        <td>[[ row.coverage ]]</td>
+                        <td>[[ row.diversity ]]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="dual-grid" v-if="overview">
+        <article class="panel-card">
+            <div class="section-title">
+                <h2>RL 训练状态</h2>
+                <button class="btn" @click="refresh" :disabled="loading">刷新</button>
+            </div>
+            <p>启用状态：[[ overview.rl.enabled ? '已开启' : '未开启' ]]</p>
+            <p>批量阈值：[[ overview.rl.batch_size ]]</p>
+            <p>探索率 ε：[[ overview.rl.epsilon ]]</p>
+            <p>活跃模型：[[ overview.rl.active_model?.version_tag || '暂无' ]]</p>
+        </article>
+        <article class="panel-card">
+            <div class="section-title">
+                <h2>数据采集状态</h2>
+                <a class="btn btn-light" href="{{ url_for('admin_bp.admin_crawler') }}">进入爬虫中心</a>
+            </div>
+            <div class="status-list">
+                <div class="status-row" v-for="[name, row] in Object.entries(overview.crawler || {})" :key="name">
+                    <strong>[[ name ]]</strong>
+                    <span>[[ row.status || 'unknown' ]]</span>
+                    <span>[[ row.updated_at || '-' ]]</span>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="dual-grid" v-if="overview?.ui_audit">
+        <article class="panel-card">
+            <h2>模板路由审计</h2>
+            <p>状态：[[ overview.ui_audit.template_routes.healthy ? 'healthy' : 'needs fix' ]]</p>
+            <p>检查文件：[[ overview.ui_audit.template_routes.checked_files ]]</p>
+            <p>问题数：[[ overview.ui_audit.template_routes.issues.length ]]</p>
+        </article>
+        <article class="panel-card">
+            <h2>后台按钮审计</h2>
+            <p>状态：[[ overview.ui_audit.admin_actions.healthy ? 'healthy' : 'needs fix' ]]</p>
+            <p>检查文件：[[ overview.ui_audit.admin_actions.checked_files ]]</p>
+            <p>问题数：[[ overview.ui_audit.admin_actions.issues.length ]]</p>
+        </article>
+    </section>
+
+    <section class="panel-card" v-if="overview?.experiments?.runs?.length">
+        <div class="section-title">
+            <h2>最近实验快照</h2>
+            <a class="btn btn-light" href="{{ url_for('admin_bp.admin_experiments') }}">查看历史趋势</a>
+        </div>
+        <p>最近一次：[[ overview.experiments.runs[0].created_at ]]</p>
+        <p>备注：[[ overview.experiments.runs[0].note || '无备注' ]]</p>
+    </section>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin-dashboard.js') }}"></script>
+{% endblock %}
